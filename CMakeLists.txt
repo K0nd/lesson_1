@@ -12,6 +12,7 @@ configure_file(version.h.in version.h)
 add_executable(helloworld_cli main.cpp)
 add_library(helloworld lib.cpp)
 add_executable(test_version test_version.cpp)
+add_executable(gtest_version gtest_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14
@@ -72,3 +73,7 @@ include(CPack)
 enable_testing()
 
 add_test(test_version test_version)
+
+add_subdirectory(vendor/google/googletest/googletest)
+target_link_libraries(gtest_version gtest gtest_main)
+add_test(NAME MyGTest COMMAND gtest_version)
